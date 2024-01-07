@@ -46,18 +46,16 @@ func formatJSON(ec *clientauthv1beta1.ExecCredential) string {
 	return string(enc)
 }
 
-func newExecCredential(token string, exp time.Time) *clientauthv1beta1.ExecCredential {
-	metaExp := metav1.NewTime(exp)
-	clientauthv1beta1.SchemeGroupVersion.Identifier()
-	ec := &clientauthv1beta1.ExecCredential{
+func newExecCredential(token string, expiration time.Time) *clientauthv1beta1.ExecCredential {
+	expirationTimestamp := metav1.NewTime(expiration)
+	return &clientauthv1beta1.ExecCredential{
 		TypeMeta: metav1.TypeMeta{
-			APIVersion: clientauthv1beta1.SchemeGroupVersion.Identifier(),
+			APIVersion: "client.authentication.k8s.io/v1beta1",
 			Kind:       "ExecCredential",
 		},
 		Status: &clientauthv1beta1.ExecCredentialStatus{
-			ExpirationTimestamp: &metaExp,
+			ExpirationTimestamp: &expirationTimestamp,
 			Token:               token,
 		},
 	}
-	return ec
 }

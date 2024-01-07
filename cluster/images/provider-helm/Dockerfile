@@ -9,6 +9,7 @@ ENV HELM_CONFIG_HOME /tmp/helm-config
 ENV HELM_DATA_HOME /tmp/helm-data
 
 ADD bin/$TARGETOS\_$TARGETARCH/provider /usr/local/bin/provider-helm
+ADD bin/$TARGETOS\_$TARGETARCH/k8s-auth-plugin /usr/local/bin/k8s-auth-plugin
 
 USER 65532
 ENTRYPOINT ["provider-helm"]
